@@ -22,6 +22,5 @@ ostream& operator<<(ostream& os, const Memory& memory)
 {
 	os << memory.size << endl;
 	os << memory.job << endl;
-
 	return os;
 }

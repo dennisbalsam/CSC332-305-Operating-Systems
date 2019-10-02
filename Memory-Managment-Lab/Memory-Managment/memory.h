@@ -22,5 +22,9 @@ public:
 	void setSize(int size) { this->size = size; }
 	int getSize() { return size; }
 
+	//set and get job
+	void setJob(Process job) { this->job = job; }
+	Process getJob() { return job; }
+
 
 };

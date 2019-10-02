@@ -1,3 +1,4 @@
 ﻿  main.cpp
-C:\Users\denni\Documents\CSI-Courses\CSC305\Memory-Managment-Lab\Memory-Managment\main.cpp(33,24): error C2660:  'memorySlots': function does not take 1 arguments
-C:\Users\denni\Documents\CSI-Courses\CSC305\Memory-Managment-Lab\Memory-Managment\main.cpp(12,6): message :  see declaration of 'memorySlots'
+C:\Users\denni\Documents\CSI-Courses\CSC305\Memory-Managment-Lab\Memory-Managment\main.cpp(94,20): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\denni\Documents\CSI-Courses\CSC305\Memory-Managment-Lab\Memory-Managment\main.cpp(96,22): warning C4018:  '<': signed/unsigned mismatch
+  Memory-Managment.vcxproj -> C:\Users\denni\Documents\CSI-Courses\CSC305\Memory-Managment-Lab\Memory-Managment\Debug\Memory-Managment.exe

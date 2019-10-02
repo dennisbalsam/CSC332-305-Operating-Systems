@@ -29,6 +29,7 @@ class Process {
 		void setjobSize(int jobSize) { this->jobSize = jobSize; }
 		//operator overload
 		friend ostream& operator<<(ostream& os, const Process& job);
+		friend bool operator==(const Process& jobOne, const Process& jobTwo);
 
 
 
