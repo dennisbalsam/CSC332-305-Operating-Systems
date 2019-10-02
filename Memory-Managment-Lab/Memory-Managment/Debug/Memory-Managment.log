@@ -1,4 +1,3 @@
 ﻿  main.cpp
-  process.cpp
-  Generating Code...
-  Memory-Managment.vcxproj -> C:\Users\denni\Documents\CSI-Courses\CSC305\Memory-Managment-Lab\Memory-Managment\Debug\Memory-Managment.exe
+C:\Users\denni\Documents\CSI-Courses\CSC305\Memory-Managment-Lab\Memory-Managment\main.cpp(33,24): error C2660:  'memorySlots': function does not take 1 arguments
+C:\Users\denni\Documents\CSI-Courses\CSC305\Memory-Managment-Lab\Memory-Managment\main.cpp(12,6): message :  see declaration of 'memorySlots'

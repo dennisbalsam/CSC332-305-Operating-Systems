@@ -1,14 +1,15 @@
 #include "process.h"
 
 //defualt constructor
-Process::Process():name(" "), status(false), partition(0) {}
+Process::Process():name(" "), status(false), partition(0), jobSize(0) {}
 //constructor with 3 parameters
-Process::Process(string name, bool status, int partition): name(name), status(status), partition(partition){}
+Process::Process(string name, bool status, int partition, int jobSize): name(name), status(status), partition(partition), jobSize(jobSize){}
 //operator overload
 ostream& operator<<(ostream& os, const Process& job)
 {
 	os << job.name << endl;
 	os << job.status << endl;
 	os << job.partition << endl;
+	os << job.jobSize << endl;
 	return os;
 }
