@@ -13,7 +13,7 @@ void memorySlots(vector<Memory>& mainMemory);
 //first fit algorithim
 void firstFitAlgorithim(vector<Memory>& mainMemory, vector<Process>& processes);
 //function to output data
-void outputMemory(vector<Memory> mainMemory);
+void outputMemory(vector<Memory> mainMemory, vector<Process> processes, string algorithim);
 
 int main()
 {
@@ -105,13 +105,19 @@ void firstFitAlgorithim(vector<Memory>& mainMemory, vector<Process>& processes)
 				}
 			}
 	}
-	outputMemory(mainMemory);
+	outputMemory(mainMemory, processes, "FIRST FIT ALGORITHIM");
 }
 
 
 //function to output current data
-void outputMemory(vector<Memory> mainMemory)
+void outputMemory(vector<Memory> mainMemory, vector<Process> processes, string algorithim)
 {
+	//clear screen
+	system("CLS");
+	//output algorithim name
+	cout << "-----------------------------------------------------------------------------" << endl;
+	cout << algorithim << endl;
+	
 	//define variables needed
 	Process emptyJob;
 	int memorySlot = 1;
@@ -126,22 +132,37 @@ void outputMemory(vector<Memory> mainMemory)
 		//add total memory used
 		totalUsed += partition.getJob().getjobSize();
 		//output data
-		cout << "-----------------------------------------------------------------------------" << endl;
-		cout << "Memory Slot " << memorySlot << " has " << partition.getJob().getName() << endl;
-		cout << partition.getJob().getName() << " is running: " << partition.getJob().getStatus() << endl;
+
 		//if partition isnt used it is not waste
 		if (partition.getJob() == emptyJob)
 		{
+			cout << "-----------------------------------------------------------------------------" << endl;
+			cout << "Memory Slot " << memorySlot << " does not have a job" << endl;
 			cout << "This slot is not used so there is no waste" << endl;
 		}
 		else
 		{
+			cout << "-----------------------------------------------------------------------------" << endl;
+			cout << "Memory Slot " << memorySlot << " has " << partition.getJob().getName() << endl;
+			if (partition.getJob().getStatus())
+			{
+				cout << partition.getJob().getName() << " is running: true"<< endl;
+			}
 			wastedMem += partition.getSize() - partition.getJob().getjobSize();
 			cout << "Total Memory Waste in this slot is: " << partition.getSize() - partition.getJob().getjobSize() << endl;
 		}
 		memorySlot++;
 	}
-	cout << endl;
+	//check what job is not assigned
+	for (auto& partition : processes) //loop through each job
+	{
+		if (partition.getPartition() == -1)
+		{
+			cout << "-----------------------------------------------------------------------------" << endl;
+			cout << partition.getName() << " is not assigned, it is in waiting state" << endl;
+		}
+	}
+	cout << "-----------------------------------------------------------------------------" << endl;
 	cout << "Total amount of storage that was available: " << totalAvailable << endl;
 	cout << "Total Amount of Storage that was used: " << totalUsed << endl;
 	cout << "Total Amount of Storage that was wasted: " << wastedMem << endl;
