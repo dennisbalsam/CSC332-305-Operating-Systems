@@ -12,6 +12,8 @@ void processInfo(vector<Process>& processes);
 void memorySlots(vector<Memory>& mainMemory);
 //first fit algorithim
 void firstFitAlgorithim(vector<Memory>& mainMemory, vector<Process>& processes);
+//worst fit algorithim
+void worstFitAlgorithim(vector<Memory>& mainMemory, vector<Process>& processes);
 //function to output data
 void outputMemory(vector<Memory> mainMemory, vector<Process> processes, string algorithim);
 
@@ -20,13 +22,36 @@ int main()
 	//define a vector to serve as the main memory
 	vector<Memory> mainMemory;
 	vector<Process> processes;
-	
+
+	//ask for user input for partitions and memory information
 	//functions to ask for user input for memory partitions and size of each partition
 	memorySlots(mainMemory);
 	//functions to ask for process amount and size of each process
 	processInfo(processes);
-	//call first fit algorithim
-	firstFitAlgorithim(mainMemory, processes);
+
+	//ask user what algorithim user wants to sort by 
+	char input;
+	cout << "What algorithim would you like to use?: ";
+	cin >> input;
+	cout << endl;
+	
+	system("cls");
+	//switch statement 
+	switch (input)
+	{
+	case 'f' :
+		//call first fit algorithim
+		firstFitAlgorithim(mainMemory, processes);
+		break;
+	case 'w':
+		//call first fit algorithim
+		worstFitAlgorithim(mainMemory, processes);
+		break;
+	default:
+		cout << "Wrong Letter Entry" << endl;
+	}
+
+
 	
 
 
@@ -86,7 +111,7 @@ void processInfo(vector<Process>& processes)
 
 //------------------------------------------------------------------first fit algorithim-----------------------------------------------------------------
 
-
+//first fit algorithim
 void firstFitAlgorithim(vector<Memory>& mainMemory, vector<Process>& processes)
 {
 	Process emptyJob; 
@@ -166,4 +191,46 @@ void outputMemory(vector<Memory> mainMemory, vector<Process> processes, string a
 	cout << "Total amount of storage that was available: " << totalAvailable << endl;
 	cout << "Total Amount of Storage that was used: " << totalUsed << endl;
 	cout << "Total Amount of Storage that was wasted: " << wastedMem << endl;
+}
+
+
+//-----------------------------------------------------------------worst fit algorithim---------------------------------------------------------------------
+void worstFitAlgorithim(vector<Memory>& mainMemory, vector<Process>& processes)
+{
+	//define an empty job for comparison
+	Process emptyJob;
+
+	//loop over jobs and partitions to see which is the worst fit
+	for (int x = 0; x < mainMemory.size(); x++)
+	{
+		int diff = -1; // diff. bewteen partition size and job size
+		int largestdiff = -1; // largest diff. found
+		int bestpartition = -1; // index of partition with largest diff.
+
+		for (int y = 0; y < processes.size(); y++)
+		{
+			// if partition is empty and job can fit in part.
+			if (mainMemory[y].getJob() == emptyJob && mainMemory[y].getSize() >= processes[x].getjobSize() && processes[x].getPartition() == -1)
+			{
+				diff = mainMemory[x].getSize() - processes[y].getjobSize();
+
+				// if largestdiff is unitialized or diff is larger than largestdiff
+				if (largestdiff < 0 || diff > largestdiff)
+				{
+					largestdiff = diff;
+					bestpartition = y;
+				}
+			}
+		}
+
+		// if a largestdiff was found for current job
+		if (largestdiff > -1)
+		{
+			processes[x].setjobSize(x + 1); // set job number for partition
+			processes[x].setStatus(true); // set job status
+		}
+	}
+
+	//output the results
+	outputMemory(mainMemory, processes, "WORST FIT ALGORITHIM");
 }
