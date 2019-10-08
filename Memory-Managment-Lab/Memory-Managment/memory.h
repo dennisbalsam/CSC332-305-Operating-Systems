@@ -26,5 +26,8 @@ public:
 	void setJob(Process job) { this->job = job; }
 	Process getJob() { return job; }
 
+	//clear job from memory
+	void clearJob() { this->job = Process(); };
+
 
 };
