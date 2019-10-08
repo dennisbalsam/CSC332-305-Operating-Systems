@@ -39,11 +39,13 @@ int main()
 	//switch statement 
 	switch (input)
 	{
-	case 'f' :
+	case 'f': 
+	case 'F':
 		//call first fit algorithim
 		firstFitAlgorithim(mainMemory, processes);
 		break;
 	case 'w':
+	case 'W':
 		//call first fit algorithim
 		worstFitAlgorithim(mainMemory, processes);
 		break;
@@ -137,8 +139,7 @@ void firstFitAlgorithim(vector<Memory>& mainMemory, vector<Process>& processes)
 //function to output current data
 void outputMemory(vector<Memory> mainMemory, vector<Process> processes, string algorithim)
 {
-	//clear screen
-	system("CLS");
+	
 	//output algorithim name
 	cout << "-----------------------------------------------------------------------------" << endl;
 	cout << algorithim << endl;
@@ -199,7 +200,6 @@ void worstFitAlgorithim(vector<Memory>& mainMemory, vector<Process>& processes)
 {
 	//define an empty job for comparison
 	Process emptyJob;
-
 	//loop over jobs and partitions to see which is the worst fit
 	for (int x = 0; x < mainMemory.size(); x++)
 	{
@@ -213,21 +213,23 @@ void worstFitAlgorithim(vector<Memory>& mainMemory, vector<Process>& processes)
 			if (mainMemory[y].getJob() == emptyJob && mainMemory[y].getSize() >= processes[x].getjobSize() && processes[x].getPartition() == -1)
 			{
 				diff = mainMemory[x].getSize() - processes[y].getjobSize();
-
 				// if largestdiff is unitialized or diff is larger than largestdiff
-				if (largestdiff < 0 || diff > largestdiff)
+				if (largestdiff < 0 || diff >= largestdiff)
 				{
 					largestdiff = diff;
 					bestpartition = y;
 				}
 			}
 		}
-
+		cout << "Best Partition: " << bestpartition << endl;
 		// if a largestdiff was found for current job
 		if (largestdiff > -1)
 		{
-			processes[x].setjobSize(x + 1); // set job number for partition
+			//give the job the partition number
+			processes[x].setPartition(bestpartition);
 			processes[x].setStatus(true); // set job status
+			 // set job  for partition
+			mainMemory[bestpartition].setJob(processes[x]);
 		}
 	}
 
