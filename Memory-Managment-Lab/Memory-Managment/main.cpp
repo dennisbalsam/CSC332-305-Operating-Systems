@@ -14,6 +14,10 @@ void memorySlots(vector<Memory>& mainMemory);
 void firstFitAlgorithim(vector<Memory>& mainMemory, vector<Process>& processes);
 //worst fit algorithim
 void worstFitAlgorithim(vector<Memory>& mainMemory, vector<Process>& processes);
+//next fit algorithim
+void nextFitAlgorithim(vector<Memory>& mainMemory, vector<Process>& processes);
+//best fit algorithim
+void bestFitAlgorithim(vector<Memory>& mainMemory, vector<Process>& processes);
 //function to output data
 void outputMemory(vector<Memory> mainMemory, vector<Process> processes, string algorithim);
 
@@ -48,6 +52,16 @@ int main()
 	case 'W':
 		//call first fit algorithim
 		worstFitAlgorithim(mainMemory, processes);
+		break;
+	case 'n':
+	case 'N':
+		//call first fit algorithim
+		nextFitAlgorithim(mainMemory, processes);
+		break;
+	case 'b':
+	case 'B':
+		//call first fit algorithim
+		bestFitAlgorithim(mainMemory, processes);
 		break;
 	default:
 		cout << "Wrong Letter Entry" << endl;
@@ -236,4 +250,92 @@ void worstFitAlgorithim(vector<Memory>& mainMemory, vector<Process>& processes)
 
 	//output the results
 	outputMemory(mainMemory, processes, "WORST FIT ALGORITHIM");
+}
+
+//-------------------------------------------------------NEXT FIT ALGORITHIM----------------------------------------------------
+void nextFitAlgorithim(vector<Memory>& mainMemory, vector<Process>& processes)
+{
+	//variable for the previous partition assigned
+	int lastassigned = -1;
+	//empty job object
+	Process emptyJob;
+	//iterate through every job
+	for (int x = 0; x < processes.size(); x++)
+	{
+		//iteration counters for the partitions
+		int y = 0;
+		int z = lastassigned + 1;
+
+		//while loop instead of for because we need to go in a circular loop
+		while (y < mainMemory.size())
+		{
+		//if counter is at last partition, reset it to 0
+			if (z == mainMemory.size())
+				z = 0;
+
+			if (mainMemory[z].getJob() == emptyJob && mainMemory[z].getSize() >= processes[x].getjobSize() && processes[x].getPartition() == -1)
+			{
+				//assign job to memory slot and set process partition number
+				processes[x].setPartition(z);
+				//put process in run state
+				processes[x].setStatus(true);
+				mainMemory[z].setJob(processes[x]);
+
+				//change the last assigned to the value of the partition
+				lastassigned = z;
+				//break out of the while loop to go to next job
+				break;
+			}
+			z++;
+			y++;
+			
+
+		}
+	}
+	//output the data
+	outputMemory(mainMemory, processes, "NEXT FIT ALGORITHIM");
+
+}
+
+//-----------------------------------------------------------------best fit algorithim---------------------------------------------------------------------
+void bestFitAlgorithim(vector<Memory>& mainMemory, vector<Process>& processes)
+{
+	//define an empty job for comparison
+	Process emptyJob;
+	//loop over jobs and partitions to see which is the worst fit
+	for (int x = 0; x < mainMemory.size(); x++)
+	{
+
+		int diff = -1; // diff. bewteen partition size and job size
+		int largestdiff = -1; // largest diff. found
+		int bestpartition = -1; // index of partition with largest diff.
+
+		for (int y = 0; y < processes.size(); y++)
+		{
+			// if partition is empty and job can fit in partition.
+			if (mainMemory[y].getJob() == emptyJob && mainMemory[y].getSize() >= processes[x].getjobSize() && processes[x].getPartition() == -1)
+			{
+				diff = mainMemory[y].getSize() - processes[x].getjobSize();
+				// if largestdiff is unitialized or diff is larger than largestdiff
+				if (largestdiff < 0 || diff < largestdiff)
+				{
+					largestdiff = diff;
+					bestpartition = y;
+				}
+			}
+		}
+		// if a largestdiff was found for current job
+		if (largestdiff > -1)
+		{
+			//give the job the partition number
+			processes[x].setPartition(bestpartition);
+			processes[x].setStatus(true); // set job status
+			 // set job  for partition
+			mainMemory[bestpartition].setJob(processes[x]);
+		}
+
+	}
+
+	//output the results
+	outputMemory(mainMemory, processes, "BEST FIT ALGORITHIM");
 }
