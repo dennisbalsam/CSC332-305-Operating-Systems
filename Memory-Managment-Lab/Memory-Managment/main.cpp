@@ -35,41 +35,52 @@ int main()
 
 	//ask user what algorithim user wants to sort by 
 	char input;
-	cout << "What algorithim would you like to use?: ";
-	cin >> input;
-	cout << endl;
+	//var to keep loop going via user input
+	char continues;
+
+
 	
 	system("cls");
-	//switch statement 
-	switch (input)
-	{
-	case 'f': 
-	case 'F':
-		//call first fit algorithim
-		firstFitAlgorithim(mainMemory, processes);
-		break;
-	case 'w':
-	case 'W':
-		//call first fit algorithim
-		worstFitAlgorithim(mainMemory, processes);
-		break;
-	case 'n':
-	case 'N':
-		//call first fit algorithim
-		nextFitAlgorithim(mainMemory, processes);
-		break;
-	case 'b':
-	case 'B':
-		//call first fit algorithim
-		bestFitAlgorithim(mainMemory, processes);
-		break;
-	default:
-		cout << "Wrong Letter Entry" << endl;
-	}
+	//variable to keep the loop of switch cases going
+	bool allocationContinue = true;
 
 
-	
+		//ask if they want to continue applying algorithims
+		cout << "F or f for first fit algorithim" << endl;
+		cout << "W or w for worst fit algorithim" << endl;
+		cout << "N or n for next fit algorithim" << endl;
+		cout << "B or b for best fit algorithim" << endl;
+		cout << "What algorithim would you like to use?: ";
+		cin >> input;
+		cout << endl;
 
+		system("cls");
+		//switch statement 
+		switch (input)
+		{
+		case 'f':
+		case 'F':
+			//call first fit algorithim
+			firstFitAlgorithim(mainMemory, processes);
+			break;
+		case 'w':
+		case 'W':
+			//call first fit algorithim
+			worstFitAlgorithim(mainMemory, processes);
+			break;
+		case 'n':
+		case 'N':
+			//call first fit algorithim
+			nextFitAlgorithim(mainMemory, processes);
+			break;
+		case 'b':
+		case 'B':
+			//call first fit algorithim
+			bestFitAlgorithim(mainMemory, processes);
+			break;
+		default:
+			cout << "Wrong Letter Entry" << endl;
+		}
 
 	return 0;
 }
@@ -124,6 +135,7 @@ void processInfo(vector<Process>& processes)
 		processes.push_back(tempObj);
 	}
 }
+
 
 //------------------------------------------------------------------first fit algorithim-----------------------------------------------------------------
 
@@ -339,3 +351,4 @@ void bestFitAlgorithim(vector<Memory>& mainMemory, vector<Process>& processes)
 	//output the results
 	outputMemory(mainMemory, processes, "BEST FIT ALGORITHIM");
 }
+

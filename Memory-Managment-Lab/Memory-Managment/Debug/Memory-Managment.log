@@ -1,10 +1,11 @@
 ﻿  main.cpp
-C:\Users\dkrup\OneDrive\Documents\CSI CSC Courses\CSC332-305-Operating-Systems\Memory-Managment-Lab\Memory-Managment\main.cpp(135,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\dkrup\OneDrive\Documents\CSI CSC Courses\CSC332-305-Operating-Systems\Memory-Managment-Lab\Memory-Managment\main.cpp(137,22): warning C4018: '<': signed/unsigned mismatch
-C:\Users\dkrup\OneDrive\Documents\CSI CSC Courses\CSC332-305-Operating-Systems\Memory-Managment-Lab\Memory-Managment\main.cpp(218,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\dkrup\OneDrive\Documents\CSI CSC Courses\CSC332-305-Operating-Systems\Memory-Managment-Lab\Memory-Managment\main.cpp(225,21): warning C4018: '<': signed/unsigned mismatch
-C:\Users\dkrup\OneDrive\Documents\CSI CSC Courses\CSC332-305-Operating-Systems\Memory-Managment-Lab\Memory-Managment\main.cpp(263,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\dkrup\OneDrive\Documents\CSI CSC Courses\CSC332-305-Operating-Systems\Memory-Managment-Lab\Memory-Managment\main.cpp(270,12): warning C4018: '<': signed/unsigned mismatch
-C:\Users\dkrup\OneDrive\Documents\CSI CSC Courses\CSC332-305-Operating-Systems\Memory-Managment-Lab\Memory-Managment\main.cpp(306,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\dkrup\OneDrive\Documents\CSI CSC Courses\CSC332-305-Operating-Systems\Memory-Managment-Lab\Memory-Managment\main.cpp(313,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\dkrup\OneDrive\Documents\CSI CSC Courses\CSC332-305-Operating-Systems\Memory-Managment-Lab\Memory-Managment\main.cpp(39,7): warning C4101: 'continues': unreferenced local variable
+C:\Users\dkrup\OneDrive\Documents\CSI CSC Courses\CSC332-305-Operating-Systems\Memory-Managment-Lab\Memory-Managment\main.cpp(147,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\dkrup\OneDrive\Documents\CSI CSC Courses\CSC332-305-Operating-Systems\Memory-Managment-Lab\Memory-Managment\main.cpp(149,22): warning C4018: '<': signed/unsigned mismatch
+C:\Users\dkrup\OneDrive\Documents\CSI CSC Courses\CSC332-305-Operating-Systems\Memory-Managment-Lab\Memory-Managment\main.cpp(230,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\dkrup\OneDrive\Documents\CSI CSC Courses\CSC332-305-Operating-Systems\Memory-Managment-Lab\Memory-Managment\main.cpp(237,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\dkrup\OneDrive\Documents\CSI CSC Courses\CSC332-305-Operating-Systems\Memory-Managment-Lab\Memory-Managment\main.cpp(275,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\dkrup\OneDrive\Documents\CSI CSC Courses\CSC332-305-Operating-Systems\Memory-Managment-Lab\Memory-Managment\main.cpp(282,12): warning C4018: '<': signed/unsigned mismatch
+C:\Users\dkrup\OneDrive\Documents\CSI CSC Courses\CSC332-305-Operating-Systems\Memory-Managment-Lab\Memory-Managment\main.cpp(318,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\dkrup\OneDrive\Documents\CSI CSC Courses\CSC332-305-Operating-Systems\Memory-Managment-Lab\Memory-Managment\main.cpp(325,21): warning C4018: '<': signed/unsigned mismatch
   Memory-Managment.vcxproj -> C:\Users\dkrup\OneDrive\Documents\CSI CSC Courses\CSC332-305-Operating-Systems\Memory-Managment-Lab\Memory-Managment\Debug\Memory-Managment.exe
