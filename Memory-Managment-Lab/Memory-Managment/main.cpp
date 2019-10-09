@@ -203,25 +203,25 @@ void worstFitAlgorithim(vector<Memory>& mainMemory, vector<Process>& processes)
 	//loop over jobs and partitions to see which is the worst fit
 	for (int x = 0; x < mainMemory.size(); x++)
 	{
+		
 		int diff = -1; // diff. bewteen partition size and job size
 		int largestdiff = -1; // largest diff. found
 		int bestpartition = -1; // index of partition with largest diff.
 
 		for (int y = 0; y < processes.size(); y++)
 		{
-			// if partition is empty and job can fit in part.
+			// if partition is empty and job can fit in partition.
 			if (mainMemory[y].getJob() == emptyJob && mainMemory[y].getSize() >= processes[x].getjobSize() && processes[x].getPartition() == -1)
 			{
-				diff = mainMemory[x].getSize() - processes[y].getjobSize();
+				diff = mainMemory[y].getSize() - processes[x].getjobSize();
 				// if largestdiff is unitialized or diff is larger than largestdiff
-				if (largestdiff < 0 || diff >= largestdiff)
+				if (largestdiff < 0 || diff > largestdiff)
 				{
 					largestdiff = diff;
 					bestpartition = y;
 				}
 			}
 		}
-		cout << "Best Partition: " << bestpartition << endl;
 		// if a largestdiff was found for current job
 		if (largestdiff > -1)
 		{
@@ -231,6 +231,7 @@ void worstFitAlgorithim(vector<Memory>& mainMemory, vector<Process>& processes)
 			 // set job  for partition
 			mainMemory[bestpartition].setJob(processes[x]);
 		}
+
 	}
 
 	//output the results
