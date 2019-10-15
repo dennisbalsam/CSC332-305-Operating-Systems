@@ -12,8 +12,10 @@ void processInfo(vector<Process>& processes);
 void memorySlots(vector<Memory>& mainMemory);
 //first fit algorithim
 void firstFitAlgorithim(vector<Memory>& mainMemory, vector<Process>& processes);
-//worst fit algorithim
+//worst fit algorithim - fixed
 void worstFitAlgorithim(vector<Memory>& mainMemory, vector<Process>& processes);
+//worst fit algorithim - dynamic
+void worstFitAlgorithimDynamic(vector<Memory>& mainMemory, vector<Process>& processes);
 //next fit algorithim
 void nextFitAlgorithim(vector<Memory>& mainMemory, vector<Process>& processes);
 //best fit algorithim
@@ -42,7 +44,8 @@ int main()
 
 	//ask if they want to continue applying algorithims
 	cout << "F or f for first fit algorithim" << endl;
-	cout << "W or w for worst fit algorithim" << endl;
+	cout << "W or w for worst fit algorithim fixed partitions" << endl;
+	cout << "D or d for worst fit algorithim dynamic partitions" << endl;
 	cout << "N or n for next fit algorithim" << endl;
 	cout << "B or b for best fit algorithim" << endl;
 	cout << "What algorithim would you like to use?: ";
@@ -62,6 +65,11 @@ int main()
 	case 'W':
 		//call first fit algorithim
 		worstFitAlgorithim(mainMemory, processes);
+		break;
+	case 'd':
+	case 'D':
+		//call first fit algorithim
+		worstFitAlgorithimDynamic(mainMemory, processes);
 		break;
 	case 'n':
 	case 'N':
@@ -169,13 +177,10 @@ void outputMemory(vector<Memory> mainMemory, vector<Process> processes, string a
 	Process emptyJob;
 	int memorySlot = 1;
 	int totalUsed = 0;
-	int totalAvailable = 0;
 	int wastedMem = 0;
 	//loop over each memory slot
 	for (auto& partition : mainMemory) //loop through each memory slot
 	{
-		//add total memory size
-		totalAvailable += partition.getSize();
 		//add total memory used
 		totalUsed += partition.getJob().getjobSize();
 		//output data
@@ -184,6 +189,7 @@ void outputMemory(vector<Memory> mainMemory, vector<Process> processes, string a
 		if (partition.getJob() == emptyJob)
 		{
 			cout << "-----------------------------------------------------------------------------" << endl;
+			cout << "The size of this partition is: " << partition.getSize() << endl;
 			cout << "Memory Slot " << memorySlot << " does not have a job" << endl;
 			cout << "This slot is not used so there is no waste" << endl;
 		}
@@ -196,6 +202,7 @@ void outputMemory(vector<Memory> mainMemory, vector<Process> processes, string a
 				cout << partition.getJob().getName() << " is running: true"<< endl;
 			}
 			wastedMem += partition.getSize() - partition.getJob().getjobSize();
+			cout << "The size of this partition is: " << partition.getSize() << endl;
 			cout << "Total Memory Waste in this slot is: " << partition.getSize() - partition.getJob().getjobSize() << endl;
 		}
 		memorySlot++;
@@ -210,7 +217,6 @@ void outputMemory(vector<Memory> mainMemory, vector<Process> processes, string a
 		}
 	}
 	cout << "-----------------------------------------------------------------------------" << endl;
-	cout << "Total amount of storage that was available: " << totalAvailable << endl;
 	cout << "Total Amount of Storage that was used: " << totalUsed << endl;
 	cout << "Total Amount of Storage that was wasted: " << wastedMem << endl;
 }
@@ -222,14 +228,14 @@ void worstFitAlgorithim(vector<Memory>& mainMemory, vector<Process>& processes)
 	//define an empty job for comparison
 	Process emptyJob;
 	//loop over jobs and partitions to see which is the worst fit
-	for (int x = 0; x < mainMemory.size(); x++)
+	for (int x = 0; x < processes.size(); x++)
 	{
 		
 		int diff = -1; // diff. bewteen partition size and job size
 		int largestdiff = -1; // largest diff. found
 		int bestpartition = -1; // index of partition with largest diff.
 
-		for (int y = 0; y < processes.size(); y++)
+		for (int y = 0; y < mainMemory.size(); y++)
 		{
 			// if partition is empty and job can fit in partition.
 			if (mainMemory[y].getJob() == emptyJob && mainMemory[y].getSize() >= processes[x].getjobSize() && processes[x].getPartition() == -1)
@@ -256,7 +262,7 @@ void worstFitAlgorithim(vector<Memory>& mainMemory, vector<Process>& processes)
 	}
 
 	//output the results
-	outputMemory(mainMemory, processes, "WORST FIT ALGORITHIM");
+	outputMemory(mainMemory, processes, "WORST FIT ALGORITHIM - FIXED");
 }
 
 //-------------------------------------------------------NEXT FIT ALGORITHIM----------------------------------------------------
@@ -310,14 +316,14 @@ void bestFitAlgorithim(vector<Memory>& mainMemory, vector<Process>& processes)
 	//define an empty job for comparison
 	Process emptyJob;
 	//loop over jobs and partitions to see which is the worst fit
-	for (int x = 0; x < mainMemory.size(); x++)
+	for (int x = 0; x < processes.size(); x++)
 	{
 
 		int diff = -1; // diff. bewteen partition size and job size
 		int largestdiff = -1; // largest diff. found
 		int bestpartition = -1; // index of partition with largest diff.
 
-		for (int y = 0; y < processes.size(); y++)
+		for (int y = 0; y < mainMemory.size(); y++)
 		{
 			// if partition is empty and job can fit in partition.
 			if (mainMemory[y].getJob() == emptyJob && mainMemory[y].getSize() >= processes[x].getjobSize() && processes[x].getPartition() == -1)
@@ -347,3 +353,49 @@ void bestFitAlgorithim(vector<Memory>& mainMemory, vector<Process>& processes)
 	outputMemory(mainMemory, processes, "BEST FIT ALGORITHIM");
 }
 
+//----------------------------------------------worst fit algorithim dynamic----------------------------------------------------------------------------------
+void worstFitAlgorithimDynamic(vector<Memory>& mainMemory, vector<Process>& processes) {
+
+	//define an empty job for comparison
+	Process emptyJob;
+	//loop over jobs and partitions to see which is the worst fit
+	for (int x = 0; x < processes.size(); x++)
+	{
+
+		int diff = -1; // diff. bewteen partition size and job size
+		int largestdiff = -1; // largest diff. found
+		int bestpartition = -1; // index of partition with largest diff.
+
+		for (int y = 0; y < mainMemory.size(); y++)
+		{
+			// if partition is empty and job can fit in partition.
+			if (mainMemory[y].getJob() == emptyJob && mainMemory[y].getSize() >= processes[x].getjobSize() && processes[x].getPartition() == -1)
+			{
+				diff = mainMemory[y].getSize() - processes[x].getjobSize();
+				// if largestdiff is unitialized or diff is larger than largestdiff
+				if (largestdiff < 0 || diff > largestdiff)
+				{
+					largestdiff = diff;
+					bestpartition = y;
+				}
+			}
+		}
+		// if a largestdiff was found for current job
+		if (largestdiff > -1)
+		{
+			//give the job the partition number
+			processes[x].setPartition(bestpartition);
+			processes[x].setStatus(true); // set job status
+			 // set job  for partition
+			mainMemory[bestpartition].setJob(processes[x]);
+			//lower the size of this partition to the job size
+			//create another partition with the extra memory
+			Memory tempObj = Memory(mainMemory[bestpartition].getSize() - processes[x].getjobSize());
+			mainMemory.push_back(tempObj);
+		}
+
+	}
+
+	//output the results
+	outputMemory(mainMemory, processes, "WORST FIT ALGORITHIM - DYNAMIC PARTITIONS");
+}
