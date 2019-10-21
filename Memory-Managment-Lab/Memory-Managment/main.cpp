@@ -388,10 +388,13 @@ void worstFitAlgorithimDynamic(vector<Memory>& mainMemory, vector<Process>& proc
 			processes[x].setStatus(true); // set job status
 			 // set job  for partition
 			mainMemory[bestpartition].setJob(processes[x]);
-			//lower the size of this partition to the job size
 			//create another partition with the extra memory
 			Memory tempObj = Memory(mainMemory[bestpartition].getSize() - processes[x].getjobSize());
+			//add new memory slot ot the vector
 			mainMemory.push_back(tempObj);
+			//lower the size of this partition to the job size
+			mainMemory[bestpartition].setSize(processes[x].getjobSize());
+
 		}
 
 	}
