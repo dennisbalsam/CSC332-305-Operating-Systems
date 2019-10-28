@@ -17,8 +17,8 @@ int main() {
 void inputData(vector<Process>& totalProcesses) {
 	//variables for inputs needed to eliminate more thsn necessary cout statements
 	string dataNeeded[] { "Required Time", "Arrival Time", "Priority" };
-	int reqTime, arrivalTime, priority;
-	int data[]{ reqTime, arrivalTime, priority };
+	int reqTime =0 , arrivalTime=0, priority=0;
+	int data[]{reqTime, arrivalTime, priority };
 
 	int totalJobs = 0;
 	//ask for total jobs

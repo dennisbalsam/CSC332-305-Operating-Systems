@@ -6,13 +6,11 @@ using namespace std;
 class Process {
 	private:
 	//variables of object
-	
 	int jobNumber, jobPriority, turnAroundTime, startTime, completionTime, executionTime, arrivalTime;
 	public:
 	//constructors
 	Process():jobNumber(-1), arrivalTime(-1), jobPriority(-1), turnAroundTime(-1), startTime(-1), completionTime(-1), executionTime(-1) {} //default constructor
-	Process(int executionTime,int arrivalTime, int jobPriority, int jobNumber):
-	jobNumber(jobNumber), jobPriority(jobPriority), arrivalTime(arrivalTime), executionTime(executionTime) {} //constructor with 3 inputted variables from user
+	Process(int executionTime,int arrivalTime, int jobPriority, int jobNumber):jobNumber(jobNumber), jobPriority(jobPriority), arrivalTime(arrivalTime), executionTime(executionTime) {} //constructor with 3 inputted variables from user
 	//get methods
 	int getJobNumber() { return jobNumber; }
 	int getJobPriority() { return jobPriority; }

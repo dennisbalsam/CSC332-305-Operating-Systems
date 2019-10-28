@@ -1,41 +1,41 @@
 ﻿  main.cpp
-C:\Users\denni\Documents\CSI-Courses\CSC305\Process-Managment-Lab\Process-Managment\process.h(19,23): error C2365:  'Process::turnAroundTime': redefinition; previous definition was 'data member'
-C:\Users\denni\Documents\CSI-Courses\CSC305\Process-Managment-Lab\Process-Managment\process.h(10): message :  see declaration of 'Process::turnAroundTime'
-C:\Users\denni\Documents\CSI-Courses\CSC305\Process-Managment-Lab\Process-Managment\process.h(19,25): error C2059:  syntax error: 'return'
-C:\Users\denni\Documents\CSI-Courses\CSC305\Process-Managment-Lab\Process-Managment\process.h(19,46): error C2238:  unexpected token(s) preceding ';'
-C:\Users\denni\Documents\CSI-Courses\CSC305\Process-Managment-Lab\Process-Managment\process.h(20,2): error C2628:  'Process' followed by 'int' is illegal (did you forget a ';'?)
-C:\Users\denni\Documents\CSI-Courses\CSC305\Process-Managment-Lab\Process-Managment\process.h(20,30): error C2065:  'startTime': undeclared identifier
-C:\Users\denni\Documents\CSI-Courses\CSC305\Process-Managment-Lab\Process-Managment\process.h(21,35): error C2065:  'completionTime': undeclared identifier
-C:\Users\denni\Documents\CSI-Courses\CSC305\Process-Managment-Lab\Process-Managment\process.h(22,34): error C2065:  'executionTime': undeclared identifier
-C:\Users\denni\Documents\CSI-Courses\CSC305\Process-Managment-Lab\Process-Managment\process.h(23,32): error C2065:  'arrivalTime': undeclared identifier
-C:\Users\denni\Documents\CSI-Courses\CSC305\Process-Managment-Lab\Process-Managment\process.h(25,37): error C2355:  'this': can only be referenced inside non-static member functions or non-static data member initializers
-C:\Users\denni\Documents\CSI-Courses\CSC305\Process-Managment-Lab\Process-Managment\process.h(26,41): error C2355:  'this': can only be referenced inside non-static member functions or non-static data member initializers
+C:\Users\denni\Documents\CSI-Courses\CSC305\Process-Managment-Lab\Process-Managment\process.h(17,23): error C2365:  'process::turnAroundTime': redefinition; previous definition was 'data member'
+C:\Users\denni\Documents\CSI-Courses\CSC305\Process-Managment-Lab\Process-Managment\process.h(9): message :  see declaration of 'process::turnAroundTime'
+C:\Users\denni\Documents\CSI-Courses\CSC305\Process-Managment-Lab\Process-Managment\process.h(17,25): error C2059:  syntax error: 'return'
+C:\Users\denni\Documents\CSI-Courses\CSC305\Process-Managment-Lab\Process-Managment\process.h(17,46): error C2238:  unexpected token(s) preceding ';'
+C:\Users\denni\Documents\CSI-Courses\CSC305\Process-Managment-Lab\Process-Managment\process.h(18,2): error C2628:  'process' followed by 'int' is illegal (did you forget a ';'?)
+C:\Users\denni\Documents\CSI-Courses\CSC305\Process-Managment-Lab\Process-Managment\process.h(18,30): error C2065:  'startTime': undeclared identifier
+C:\Users\denni\Documents\CSI-Courses\CSC305\Process-Managment-Lab\Process-Managment\process.h(19,35): error C2065:  'completionTime': undeclared identifier
+C:\Users\denni\Documents\CSI-Courses\CSC305\Process-Managment-Lab\Process-Managment\process.h(20,34): error C2065:  'executionTime': undeclared identifier
+C:\Users\denni\Documents\CSI-Courses\CSC305\Process-Managment-Lab\Process-Managment\process.h(21,32): error C2065:  'arrivalTime': undeclared identifier
+C:\Users\denni\Documents\CSI-Courses\CSC305\Process-Managment-Lab\Process-Managment\process.h(23,37): error C2355:  'this': can only be referenced inside non-static member functions or non-static data member initializers
+C:\Users\denni\Documents\CSI-Courses\CSC305\Process-Managment-Lab\Process-Managment\process.h(24,41): error C2355:  'this': can only be referenced inside non-static member functions or non-static data member initializers
+C:\Users\denni\Documents\CSI-Courses\CSC305\Process-Managment-Lab\Process-Managment\process.h(25,47): error C2355:  'this': can only be referenced inside non-static member functions or non-static data member initializers
+C:\Users\denni\Documents\CSI-Courses\CSC305\Process-Managment-Lab\Process-Managment\process.h(26,37): error C2355:  'this': can only be referenced inside non-static member functions or non-static data member initializers
 C:\Users\denni\Documents\CSI-Courses\CSC305\Process-Managment-Lab\Process-Managment\process.h(27,47): error C2355:  'this': can only be referenced inside non-static member functions or non-static data member initializers
-C:\Users\denni\Documents\CSI-Courses\CSC305\Process-Managment-Lab\Process-Managment\process.h(28,37): error C2355:  'this': can only be referenced inside non-static member functions or non-static data member initializers
-C:\Users\denni\Documents\CSI-Courses\CSC305\Process-Managment-Lab\Process-Managment\process.h(29,47): error C2355:  'this': can only be referenced inside non-static member functions or non-static data member initializers
-C:\Users\denni\Documents\CSI-Courses\CSC305\Process-Managment-Lab\Process-Managment\process.h(30,45): error C2355:  'this': can only be referenced inside non-static member functions or non-static data member initializers
-C:\Users\denni\Documents\CSI-Courses\CSC305\Process-Managment-Lab\Process-Managment\process.h(31,41): error C2355:  'this': can only be referenced inside non-static member functions or non-static data member initializers
-C:\Users\denni\Documents\CSI-Courses\CSC305\Process-Managment-Lab\Process-Managment\process.h(33,2): error C2255:  'friend': not allowed outside of a class definition
-C:\Users\denni\Documents\CSI-Courses\CSC305\Process-Managment-Lab\Process-Managment\process.h(35,27): error C2248:  'Process::jobNumber': cannot access private member declared in class 'Process'
-C:\Users\denni\Documents\CSI-Courses\CSC305\Process-Managment-Lab\Process-Managment\process.h(10): message :  see declaration of 'Process::jobNumber'
-C:\Users\denni\Documents\CSI-Courses\CSC305\Process-Managment-Lab\Process-Managment\process.h(6): message :  see declaration of 'Process'
-C:\Users\denni\Documents\CSI-Courses\CSC305\Process-Managment-Lab\Process-Managment\process.h(36,29): error C2248:  'Process::jobPriority': cannot access private member declared in class 'Process'
-C:\Users\denni\Documents\CSI-Courses\CSC305\Process-Managment-Lab\Process-Managment\process.h(10): message :  see declaration of 'Process::jobPriority'
-C:\Users\denni\Documents\CSI-Courses\CSC305\Process-Managment-Lab\Process-Managment\process.h(6): message :  see declaration of 'Process'
-C:\Users\denni\Documents\CSI-Courses\CSC305\Process-Managment-Lab\Process-Managment\process.h(37,29): error C2248:  'Process::arrivalTime': cannot access private member declared in class 'Process'
-C:\Users\denni\Documents\CSI-Courses\CSC305\Process-Managment-Lab\Process-Managment\process.h(10): message :  see declaration of 'Process::arrivalTime'
-C:\Users\denni\Documents\CSI-Courses\CSC305\Process-Managment-Lab\Process-Managment\process.h(6): message :  see declaration of 'Process'
-C:\Users\denni\Documents\CSI-Courses\CSC305\Process-Managment-Lab\Process-Managment\process.h(38,31): error C2248:  'Process::executionTime': cannot access private member declared in class 'Process'
-C:\Users\denni\Documents\CSI-Courses\CSC305\Process-Managment-Lab\Process-Managment\process.h(10): message :  see declaration of 'Process::executionTime'
-C:\Users\denni\Documents\CSI-Courses\CSC305\Process-Managment-Lab\Process-Managment\process.h(6): message :  see declaration of 'Process'
-C:\Users\denni\Documents\CSI-Courses\CSC305\Process-Managment-Lab\Process-Managment\process.h(39,32): error C2248:  'Process::turnAroundTime': cannot access private member declared in class 'Process'
-C:\Users\denni\Documents\CSI-Courses\CSC305\Process-Managment-Lab\Process-Managment\process.h(10): message :  see declaration of 'Process::turnAroundTime'
-C:\Users\denni\Documents\CSI-Courses\CSC305\Process-Managment-Lab\Process-Managment\process.h(6): message :  see declaration of 'Process'
-C:\Users\denni\Documents\CSI-Courses\CSC305\Process-Managment-Lab\Process-Managment\process.h(40,27): error C2248:  'Process::startTime': cannot access private member declared in class 'Process'
-C:\Users\denni\Documents\CSI-Courses\CSC305\Process-Managment-Lab\Process-Managment\process.h(10): message :  see declaration of 'Process::startTime'
-C:\Users\denni\Documents\CSI-Courses\CSC305\Process-Managment-Lab\Process-Managment\process.h(6): message :  see declaration of 'Process'
-C:\Users\denni\Documents\CSI-Courses\CSC305\Process-Managment-Lab\Process-Managment\process.h(41,32): error C2248:  'Process::completionTime': cannot access private member declared in class 'Process'
-C:\Users\denni\Documents\CSI-Courses\CSC305\Process-Managment-Lab\Process-Managment\process.h(10): message :  see declaration of 'Process::completionTime'
-C:\Users\denni\Documents\CSI-Courses\CSC305\Process-Managment-Lab\Process-Managment\process.h(6): message :  see declaration of 'Process'
-C:\Users\denni\Documents\CSI-Courses\CSC305\Process-Managment-Lab\Process-Managment\process.h(45,1): error C2059:  syntax error: '}'
-C:\Users\denni\Documents\CSI-Courses\CSC305\Process-Managment-Lab\Process-Managment\process.h(45,1): error C2143:  syntax error: missing ';' before '}'
+C:\Users\denni\Documents\CSI-Courses\CSC305\Process-Managment-Lab\Process-Managment\process.h(28,45): error C2355:  'this': can only be referenced inside non-static member functions or non-static data member initializers
+C:\Users\denni\Documents\CSI-Courses\CSC305\Process-Managment-Lab\Process-Managment\process.h(29,41): error C2355:  'this': can only be referenced inside non-static member functions or non-static data member initializers
+C:\Users\denni\Documents\CSI-Courses\CSC305\Process-Managment-Lab\Process-Managment\process.h(31,2): error C2255:  'friend': not allowed outside of a class definition
+C:\Users\denni\Documents\CSI-Courses\CSC305\Process-Managment-Lab\Process-Managment\process.h(33,27): error C2248:  'process::jobNumber': cannot access private member declared in class 'process'
+C:\Users\denni\Documents\CSI-Courses\CSC305\Process-Managment-Lab\Process-Managment\process.h(9): message :  see declaration of 'process::jobNumber'
+C:\Users\denni\Documents\CSI-Courses\CSC305\Process-Managment-Lab\Process-Managment\process.h(6): message :  see declaration of 'process'
+C:\Users\denni\Documents\CSI-Courses\CSC305\Process-Managment-Lab\Process-Managment\process.h(34,29): error C2248:  'process::jobPriority': cannot access private member declared in class 'process'
+C:\Users\denni\Documents\CSI-Courses\CSC305\Process-Managment-Lab\Process-Managment\process.h(9): message :  see declaration of 'process::jobPriority'
+C:\Users\denni\Documents\CSI-Courses\CSC305\Process-Managment-Lab\Process-Managment\process.h(6): message :  see declaration of 'process'
+C:\Users\denni\Documents\CSI-Courses\CSC305\Process-Managment-Lab\Process-Managment\process.h(35,29): error C2248:  'process::arrivalTime': cannot access private member declared in class 'process'
+C:\Users\denni\Documents\CSI-Courses\CSC305\Process-Managment-Lab\Process-Managment\process.h(9): message :  see declaration of 'process::arrivalTime'
+C:\Users\denni\Documents\CSI-Courses\CSC305\Process-Managment-Lab\Process-Managment\process.h(6): message :  see declaration of 'process'
+C:\Users\denni\Documents\CSI-Courses\CSC305\Process-Managment-Lab\Process-Managment\process.h(36,31): error C2248:  'process::executionTime': cannot access private member declared in class 'process'
+C:\Users\denni\Documents\CSI-Courses\CSC305\Process-Managment-Lab\Process-Managment\process.h(9): message :  see declaration of 'process::executionTime'
+C:\Users\denni\Documents\CSI-Courses\CSC305\Process-Managment-Lab\Process-Managment\process.h(6): message :  see declaration of 'process'
+C:\Users\denni\Documents\CSI-Courses\CSC305\Process-Managment-Lab\Process-Managment\process.h(37,32): error C2248:  'process::turnAroundTime': cannot access private member declared in class 'process'
+C:\Users\denni\Documents\CSI-Courses\CSC305\Process-Managment-Lab\Process-Managment\process.h(9): message :  see declaration of 'process::turnAroundTime'
+C:\Users\denni\Documents\CSI-Courses\CSC305\Process-Managment-Lab\Process-Managment\process.h(6): message :  see declaration of 'process'
+C:\Users\denni\Documents\CSI-Courses\CSC305\Process-Managment-Lab\Process-Managment\process.h(38,27): error C2248:  'process::startTime': cannot access private member declared in class 'process'
+C:\Users\denni\Documents\CSI-Courses\CSC305\Process-Managment-Lab\Process-Managment\process.h(9): message :  see declaration of 'process::startTime'
+C:\Users\denni\Documents\CSI-Courses\CSC305\Process-Managment-Lab\Process-Managment\process.h(6): message :  see declaration of 'process'
+C:\Users\denni\Documents\CSI-Courses\CSC305\Process-Managment-Lab\Process-Managment\process.h(39,32): error C2248:  'process::completionTime': cannot access private member declared in class 'process'
+C:\Users\denni\Documents\CSI-Courses\CSC305\Process-Managment-Lab\Process-Managment\process.h(9): message :  see declaration of 'process::completionTime'
+C:\Users\denni\Documents\CSI-Courses\CSC305\Process-Managment-Lab\Process-Managment\process.h(6): message :  see declaration of 'process'
+C:\Users\denni\Documents\CSI-Courses\CSC305\Process-Managment-Lab\Process-Managment\process.h(43,1): error C2059:  syntax error: '}'
+C:\Users\denni\Documents\CSI-Courses\CSC305\Process-Managment-Lab\Process-Managment\process.h(43,1): error C2143:  syntax error: missing ';' before '}'
