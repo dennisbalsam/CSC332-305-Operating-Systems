@@ -1,15 +1,21 @@
 #include <iostream>
+#include <iomanip>
 #include "Process.h"
 #include <vector>
 using namespace std;
 
 //asks for user input
 void inputData(vector<Process>& totalProcesses);
+void outputData(vector<Process> totalProcesses);
+void fcfs(vector<Process>& totalProcesses);
 
+//main function
 int main() {
 
 	vector<Process> totalProcesses;
-
+	inputData(totalProcesses);
+	outputData(totalProcesses);
+	
 	return 0;
 }
 
@@ -22,7 +28,7 @@ void inputData(vector<Process>& totalProcesses) {
 
 	int totalJobs = 0;
 	//ask for total jobs
-	cout << "Input the amount of processes";
+	cout << "Input the amount of processes: ";
 	cin >> totalJobs;
 	cout << endl;
 
@@ -30,10 +36,28 @@ void inputData(vector<Process>& totalProcesses) {
 	{
 		for (int j = 0; j < 3; j++)
 		{
-			cout << "Please input the " << dataNeeded[j] << " of job " << i << endl;
+			cout << "Please input the " << dataNeeded[j] << " of job " << i+1 << ": ";
 			cin >> data[j];
-			cout << endl;
 		}
+		cout << "----------------------------------------------" << endl;
 		totalProcesses.push_back(Process(data[0], data[1], data[2], i));
 	}
+}
+
+//output data
+void outputData(vector<Process> totalProcesses){
+	//create headers table
+	cout <<  "Job Number" << setw(20) << "Arrival Time" << setw(20) << "Start Time" << setw(20) << "Completion Time" << setw(20) << "Turn Around Time" << setw(20) << "Execution Time"<<   endl;
+	//loop to output each process
+	for (auto& process : totalProcesses)
+	{
+		cout << process;
+	}
+}
+
+
+
+void fcfs(vector<Process>& totalProcesses) {
+
+
 }

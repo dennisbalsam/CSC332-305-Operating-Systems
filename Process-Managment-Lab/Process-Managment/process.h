@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include <iomanip>
 using namespace std;
 
 class Process {
@@ -8,16 +9,16 @@ private:
 	int jobNumber, jobPriority, turnAroundTime, startTime, completionTime, executionTime, arrivalTime;
 public:
 	//constructors
-	Process() :jobNumber(-1), arrivalTime(-1), jobPriority(-1), turnAroundTime(-1), startTime(-1), completionTime(-1), executionTime(-1) {} //default constructor
-	Process(int executionTime, int arrivalTime, int jobPriority, int jobNumber) :jobNumber(jobNumber), jobPriority(jobPriority), arrivalTime(arrivalTime), executionTime(executionTime) {} //constructor with 3 inputted variables from user
+	Process() :jobNumber(0), arrivalTime(0), jobPriority(0), turnAroundTime(0), startTime(0), completionTime(0), executionTime(0) {} //default constructor
+	Process(int executionTime, int arrivalTime, int jobPriority, int jobNumber) :jobNumber(jobNumber), jobPriority(jobPriority), arrivalTime(arrivalTime), executionTime(executionTime), turnAroundTime(0), startTime(0), completionTime(0) {} //constructor with 3 inputted variables from user
 	//get methods
-	int getJobNumber() { return jobNumber; }
-	int getJobPriority() { return jobPriority; }
-	int turnAroundTime() { return turnAroundTime; }
-	int getStartTime() { return startTime; }
-	int getCompletionTime() { return completionTime; }
-	int getExecutionTime() { return executionTime; }
-	int getArrivalTime() { return arrivalTime; }
+	int getjobNumber() { return jobNumber; }
+	int getjobPriority() { return jobPriority; }
+	int getturnaroundTime() { return turnAroundTime; }
+	int getstartTime() { return startTime; }
+	int getcompletionTime() { return completionTime; }
+	int getexecutionTime() { return executionTime; }
+	int getarrivalTime() { return arrivalTime; }
 	//set methods
 	void setJobNumber(int jobNumber) { this->jobNumber = jobNumber; }
 	void setJobPriority(int jobPriority) { this->jobPriority = jobPriority; }
@@ -29,13 +30,8 @@ public:
 	//operator overload
 	friend ostream& operator<<(ostream& os, const Process& process)
 	{
-		os << process.jobNumber << endl;
-		os << process.jobPriority << endl;
-		os << process.arrivalTime << endl;
-		os << process.executionTime << endl;
-		os << process.turnAroundTime << endl;
-		os << process.startTime << endl;
-		os << process.completionTime << endl;
+		os<< setw(5) << process.jobNumber +1 << setw(20) << process.arrivalTime << setw(20) << process.startTime
+			<< setw(20) << process.completionTime << setw(20) << process.turnAroundTime << setw(20) << process.executionTime << endl;
 		return os;
 	}
 
