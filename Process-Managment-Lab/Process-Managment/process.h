@@ -34,5 +34,9 @@ public:
 			<< setw(20) << process.completionTime << setw(20) << process.turnAroundTime << setw(20) << process.executionTime << endl;
 		return os;
 	}
+	//operator overload for sorting
+	bool operator< (const Process& other) const {
+		return arrivalTime < other.arrivalTime;
+	}
 
 };
