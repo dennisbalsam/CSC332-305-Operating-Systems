@@ -35,8 +35,8 @@ public:
 		return os;
 	}
 	//operator overload for sorting
-	bool operator< (const Process& other) const {
-		return arrivalTime < other.arrivalTime;
-	}
+	//bool operator< (const Process& other) const {
+	//	return arrivalTime < other.arrivalTime;
+	//}
 
 };
