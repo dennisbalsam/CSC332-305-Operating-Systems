@@ -7,10 +7,12 @@ class Process {
 private:
 	//variables of object
 	int jobNumber, jobPriority, turnAroundTime, startTime, completionTime, executionTime, arrivalTime;
+	bool arrived, executed;
 public:
 	//constructors
-	Process() :jobNumber(0), arrivalTime(0), jobPriority(0), turnAroundTime(0), startTime(0), completionTime(0), executionTime(0) {} //default constructor
-	Process(int executionTime, int arrivalTime, int jobPriority, int jobNumber) :jobNumber(jobNumber), jobPriority(jobPriority), arrivalTime(arrivalTime), executionTime(executionTime), turnAroundTime(0), startTime(0), completionTime(0) {} //constructor with 3 inputted variables from user
+	Process() :jobNumber(0), arrivalTime(0), jobPriority(0), turnAroundTime(0), startTime(0), completionTime(0), executionTime(0), arrived(false), executed(false) {} //default constructor
+	Process(int executionTime, int arrivalTime, int jobPriority, int jobNumber) :jobNumber(jobNumber), jobPriority(jobPriority), arrivalTime(arrivalTime), executionTime(executionTime), 
+		turnAroundTime(0), startTime(0), completionTime(0), arrived(false), executed(false) {} //constructor with 3 inputted variables from user
 	//get methods
 	int getjobNumber() { return jobNumber; }
 	int getjobPriority() { return jobPriority; }
@@ -19,6 +21,8 @@ public:
 	int getcompletionTime() { return completionTime; }
 	int getexecutionTime() { return executionTime; }
 	int getarrivalTime() { return arrivalTime; }
+	bool getArrived() { return arrived; }
+	bool getExecuted() { return executed; }
 	//set methods
 	void setJobNumber(int jobNumber) { this->jobNumber = jobNumber; }
 	void setJobPriority(int jobPriority) { this->jobPriority = jobPriority; }
@@ -27,6 +31,8 @@ public:
 	void setCompletionTime(int completionTime) { this->completionTime = completionTime; }
 	void setExecutionTime(int executionTime) { this->executionTime = executionTime; }
 	void setArrivalTime(int arrivalTime) { this->arrivalTime = arrivalTime; }
+	void setArrived(bool arrived) { this->arrived = arrived; }
+	void setExecuted(bool executed) { this->executed = executed; }
 	//operator overload
 	friend ostream& operator<<(ostream& os, const Process& process)
 	{
@@ -34,9 +40,4 @@ public:
 			<< setw(20) << process.completionTime << setw(20) << process.turnAroundTime << setw(20) << process.executionTime << endl;
 		return os;
 	}
-	//operator overload for sorting
-	//bool operator< (const Process& other) const {
-	//	return arrivalTime < other.arrivalTime;
-	//}
-
 };
