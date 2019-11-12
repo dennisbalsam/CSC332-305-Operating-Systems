@@ -15,6 +15,7 @@ bool compareExecution(Process p1, Process p2);
 bool notArrived(vector<Process> totalProcesses);
 bool compareArrival(Process, Process);
 int totalExectutionTime(vector<Process> totalProcesses);
+int search(int jobNumber, vector<Process> totalProcesses);
 //main function
 int main() {
 
@@ -60,7 +61,8 @@ void inputData(vector<Process>& totalProcesses) {
 //output data
 void outputData(vector<Process> totalProcesses,  double turnaroundtime, string order){
 	//create headers table
-	cout <<  "Job Number" << setw(20) << "Arrival Time" << setw(20) << "Start Time" << setw(20) << "Completion Time" << setw(20) << "Turn Around Time" << setw(20) << "Execution Time"<<   endl;
+	cout <<  "Job Number" << setw(20) << "Arrival Time" << setw(20) << "Start Time" << setw(20) 
+		<< "Completion Time" << setw(20) << "Turn Around Time" << setw(20) << "Execution Time"<< setw(20) << "Executed" << endl;
 	//loop to output each process
 	for (auto& process : totalProcesses)
 	{
@@ -114,11 +116,11 @@ void sjn(vector<Process>& totalProcesses) {
 
 	//temp vector for running through arrived jobs
 	vector<Process> temp;
-
 	//calculate how long the total time of execution should be
 	int totaltime = totalExectutionTime(totalProcesses) + totalProcesses[0].getarrivalTime();
 	int runUntil = 0;
-	
+	int currentlyRunning = 0;
+	int current = 0;
 	//loop to represent real time os
 	for (int i = 1; i <= totaltime; i++)
 	{
@@ -133,26 +135,43 @@ void sjn(vector<Process>& totalProcesses) {
 				{
 					process.setArrived(true);
 					temp.push_back(process);
+					sort(temp.begin(), temp.end(), compareExecution);
 				}
 			}
 		}
-		//sort the existing jobs by execution time if more than one job exists
-		if (temp.size() > 1)
-			sort(temp.begin(), temp.end(), compareExecution);
 
-		if (runUntil == 0)
+		//sort the existing jobs by execution time if more than one job exists
+		if (runUntil == i)
 		{
+			runUntil = 0;
+			current = search(currentlyRunning, temp);
+			temp[current].setCompletionTime(i);
+			temp[current].setExecuted(true);
 
 		}
 
+		if (runUntil == 0 && temp.size() > 1)
+		{
+			for (auto process: temp)
+			{
+				if (!process.getExecuted())
+				{
+					runUntil = i +  process.getexecutionTime();
+					currentlyRunning = process.getjobNumber();
+					break;
+				}
+			}
+			
+		}
 
 
-		//cout << "---------------------------------------------------------" << endl;
-		//outputData(temp, 12.0, "hello");
+		
 	
 
 	}
-	
+	sort(temp.begin(), temp.end(), compareArrival);
+	cout << "---------------------------------------------------------" << endl;
+	outputData(temp, 12.0, "hello");
 
 }
 
@@ -186,4 +205,17 @@ int totalExectutionTime(vector<Process> totalProcesses) {
 		totaltime += process.getexecutionTime();
 	}
 	return totaltime;
+}
+
+//returns index of element based off job name
+int search(int jobNumber, vector<Process> temp)
+{
+	for (int i = 0; i < temp.size(); i++)
+	{
+		if (temp[i].getjobNumber() == jobNumber)
+		{
+			return i;
+		}
+
+	}
 }

@@ -1,3 +1,6 @@
 ﻿  main.cpp
-C:\Users\denni\Documents\CSI-Courses\CSC305\Process-Managment-Lab\Process-Managment\main.cpp(91,20): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\denni\Documents\CSI-Courses\CSC305\Process-Managment-Lab\Process-Managment\main.cpp(93,20): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\denni\Documents\CSI-Courses\CSC305\Process-Managment-Lab\Process-Managment\main.cpp(124,7): warning C4101:  'found': unreferenced local variable
+C:\Users\denni\Documents\CSI-Courses\CSC305\Process-Managment-Lab\Process-Managment\main.cpp(216,20): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\denni\Documents\CSI-Courses\CSC305\Process-Managment-Lab\Process-Managment\main.cpp(216,20): warning C4018: C:\Users\denni\Documents\CSI-Courses\CSC305\Process-Managment-Lab\Process-Managment\main.cpp(224) : warning C4715: 'search': not all control paths return a value
   Process-Managment.vcxproj -> C:\Users\denni\Documents\CSI-Courses\CSC305\Process-Managment-Lab\Process-Managment\Debug\Process-Managment.exe

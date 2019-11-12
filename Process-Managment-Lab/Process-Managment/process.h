@@ -37,7 +37,7 @@ public:
 	friend ostream& operator<<(ostream& os, const Process& process)
 	{
 		os<< setw(5) << process.jobNumber +1 << setw(20) << process.arrivalTime << setw(20) << process.startTime
-			<< setw(20) << process.completionTime << setw(20) << process.turnAroundTime << setw(20) << process.executionTime << endl;
+			<< setw(20) << process.completionTime << setw(20) << process.turnAroundTime << setw(20) << process.executionTime << setw(20) << process.executed << endl;
 		return os;
 	}
 };
