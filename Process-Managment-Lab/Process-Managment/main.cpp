@@ -11,8 +11,10 @@ void inputData(vector<Process>& totalProcesses);
 void outputData(vector<Process> totalProcesses, double turnaroundtime, string order);
 void fcfs(vector<Process>& totalProcesses);
 void sjn(vector<Process>& totalProcesses);
+void priority(vector<Process>& totalProcesses);
 bool compareExecution(Process p1, Process p2);
 bool notArrived(vector<Process> totalProcesses);
+bool comparePriority(Process p1, Process p2);
 bool compareArrival(Process, Process);
 int totalExectutionTime(vector<Process> totalProcesses);
 int search(int jobNumber, vector<Process> totalProcesses);
@@ -27,7 +29,8 @@ int main() {
 	//inputData(totalProcesses);
 	//fcfs(totalProcesses);
 	//outputData(totalProcesses);
-	sjn(totalProcesses);
+	//sjn(totalProcesses);
+	priority(totalProcesses);
 	
 	return 0;
 }
@@ -61,7 +64,7 @@ void inputData(vector<Process>& totalProcesses) {
 //output data
 void outputData(vector<Process> totalProcesses,  double turnaroundtime, string order){
 	//create headers table
-	cout <<  "Job Number" << setw(20) << "Arrival Time" << setw(20) << "Start Time" << setw(20) 
+	cout <<  "Job Number" << setw(20) << "Arrival Time" << setw(20) << "Start Time" << setw(20) << "Priority" << setw(20)
 		<< "Completion Time" << setw(20) << "Turn Around Time" << setw(20) << "Execution Time"<< setw(20) << "Executed" << endl;
 	//loop to output each process
 	for (auto& process : totalProcesses)
@@ -121,6 +124,8 @@ void sjn(vector<Process>& totalProcesses) {
 	int runUntil = 0;
 	int currentlyRunning = 0;
 	int current = 0;
+	double turnaroundtime = 0.0;
+	string output = "The order of execution is: ";
 	//loop to represent real time os
 	for (int i = 1; i <= totaltime; i++)
 	{
@@ -147,17 +152,21 @@ void sjn(vector<Process>& totalProcesses) {
 			current = search(currentlyRunning, temp);
 			temp[current].setCompletionTime(i);
 			temp[current].setExecuted(true);
-
+			temp[current].setTurnAroundTime(i - temp[current].getarrivalTime());
+			turnaroundtime += temp[current].getturnaroundTime();
 		}
 
 		if (runUntil == 0 && temp.size() > 1)
 		{
-			for (auto process: temp)
+			//for (auto process: temp)
+			for(int j = 0; j < temp.size(); j++)
 			{
-				if (!process.getExecuted())
+				if (!temp[j].getExecuted())
 				{
-					runUntil = i +  process.getexecutionTime();
-					currentlyRunning = process.getjobNumber();
+					runUntil = i +  temp[j].getexecutionTime();
+					currentlyRunning = temp[j].getjobNumber();
+					temp[j].setStartTime(i);
+					output += " -> " + to_string(temp[j].getjobNumber() + 1);
 					break;
 				}
 			}
@@ -169,14 +178,65 @@ void sjn(vector<Process>& totalProcesses) {
 	
 
 	}
+	turnaroundtime /= temp.size();
 	sort(temp.begin(), temp.end(), compareArrival);
-	cout << "---------------------------------------------------------" << endl;
-	outputData(temp, 12.0, "hello");
+	outputData(temp, turnaroundtime, output);
 
 }
 
 
+//priority 
+void priority(vector<Process>& totalProcesses) {
+	//sort jobs by arrival times
+	sort(totalProcesses.begin(), totalProcesses.end(), compareArrival);
 
+	//temp vector for running through arrived jobs
+	vector<Process> temp;
+	//calculate how long the total time of execution should be
+	int totaltime = totalExectutionTime(totalProcesses) + totalProcesses[0].getarrivalTime();
+	int runUntil = 0;
+	//int currentlyRunning = 0;
+	//int current = 0;
+	//double turnaroundtime = 0.0;
+	string output = "The order of execution is: ";
+
+	//loop to represent real time os
+	for (int i = 1; i <= totaltime; i++)
+	{
+		//check if there are processes that have not arrived
+		if (!notArrived(totalProcesses) && temp.size() != totalProcesses.size())
+		{
+			//loop to see if any jobs arrive at this time
+			for (auto& process : totalProcesses)
+			{
+				//if a job has arrived add it to the vector
+				if (process.getarrivalTime() == i && !process.getArrived())
+				{
+					process.setArrived(true);
+					temp.push_back(process);
+					sort(temp.begin(), temp.end(), comparePriority);
+					outputData(temp, 0.0, " ");
+				}
+			}
+		}
+
+
+
+
+
+
+	}
+	turnaroundtime /= temp.size();
+	//sort(temp.begin(), temp.end(), compareArrival);
+	outputData(temp, turnaroundtime, output);
+}
+
+
+
+//compare priority
+bool comparePriority(Process p1, Process p2) {
+	return p1.getjobPriority() < p2.getjobPriority();
+}
 
 //compare arrival times for sort method
 bool compareArrival(Process p1, Process p2) {

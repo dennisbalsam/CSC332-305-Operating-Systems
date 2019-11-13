@@ -33,10 +33,12 @@ public:
 	void setArrivalTime(int arrivalTime) { this->arrivalTime = arrivalTime; }
 	void setArrived(bool arrived) { this->arrived = arrived; }
 	void setExecuted(bool executed) { this->executed = executed; }
+	//decrement of execution time
+	void decrementtime() { executionTime--; }
 	//operator overload
 	friend ostream& operator<<(ostream& os, const Process& process)
 	{
-		os<< setw(5) << process.jobNumber +1 << setw(20) << process.arrivalTime << setw(20) << process.startTime
+		os<< setw(5) << process.jobNumber +1 << setw(20) << process.arrivalTime << setw(20) << process.startTime << setw(20) << process.jobPriority
 			<< setw(20) << process.completionTime << setw(20) << process.turnAroundTime << setw(20) << process.executionTime << setw(20) << process.executed << endl;
 		return os;
 	}
