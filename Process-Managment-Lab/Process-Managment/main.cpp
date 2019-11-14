@@ -22,10 +22,10 @@ int search(int jobNumber, vector<Process> totalProcesses);
 int main() {
 
 	vector<Process> totalProcesses;
-	totalProcesses.push_back(Process(3, 2,3, 0));
-	totalProcesses.push_back(Process(4, 2, 2, 1));
-	totalProcesses.push_back(Process(1, 3, 1, 2));
-	totalProcesses.push_back(Process(2, 5, 3, 3));
+	totalProcesses.push_back(Process(3, 2,3, 1));
+	totalProcesses.push_back(Process(4, 2, 2, 2));
+	totalProcesses.push_back(Process(1, 3, 1, 3));
+	totalProcesses.push_back(Process(2, 5, 3, 4));
 	//inputData(totalProcesses);
 	//fcfs(totalProcesses);
 	//outputData(totalProcesses);
@@ -191,20 +191,20 @@ void priority(vector<Process>& totalProcesses) {
 	sort(totalProcesses.begin(), totalProcesses.end(), compareArrival);
 
 	//temp vector for running through arrived jobs
-	vector<Process> temp;
+	vector<Process>* temp = new vector <Process>;
+	//dummy job
+	Process* currentJob = new Process(1, 1, 1, 1);
 	//calculate how long the total time of execution should be
 	int totaltime = totalExectutionTime(totalProcesses) + totalProcesses[0].getarrivalTime();
-	int runUntil = 0;
-	//int currentlyRunning = 0;
-	//int current = 0;
-	//double turnaroundtime = 0.0;
+	double turnaroundtime = 0.0;
 	string output = "The order of execution is: ";
-
+	bool newArrived = false;
 	//loop to represent real time os
 	for (int i = 1; i <= totaltime; i++)
 	{
+		cout << "We are on job " << currentJob->getjobNumber() << " at time " << i << endl;
 		//check if there are processes that have not arrived
-		if (!notArrived(totalProcesses) && temp.size() != totalProcesses.size())
+		if (!notArrived(totalProcesses) && temp->size() != totalProcesses.size())
 		{
 			//loop to see if any jobs arrive at this time
 			for (auto& process : totalProcesses)
@@ -213,22 +213,74 @@ void priority(vector<Process>& totalProcesses) {
 				if (process.getarrivalTime() == i && !process.getArrived())
 				{
 					process.setArrived(true);
-					temp.push_back(process);
-					sort(temp.begin(), temp.end(), comparePriority);
-					outputData(temp, 0.0, " ");
+					temp->push_back(process);
+					
+					//currentJob = &temp->front();
+					//cout << "The job you're on is " << currentJob->getjobNumber() << endl;
+					sort(temp->begin(), temp->end(), comparePriority);
+					if (*currentJob != temp->front())
+						newArrived = true;
+
 				}
 			}
 		}
+		if (temp->size() > 0)
+		{
+			if (currentJob->getstartTime() != i && currentJob->getexecutionTime() != 0)
+			{
+
+				currentJob->decrementtime();
+
+			}
+
+			if (currentJob->getexecutionTime() == 0)
+			{
+				currentJob->setCompletionTime(i);
+				currentJob->setExecuted(true);
+				
+				for (auto& process : *temp)
+				{
+					if (!process.getExecuted())
+					{
+						currentJob = &process;
+
+						if (currentJob->getstartTime() == 0)
+							currentJob->setStartTime(i);
+						break;
+					}
+
+				}
+
+			}
 
 
 
 
+			if (newArrived && *currentJob != temp->front())
+			{
+				//cout << "ENTERING NEW JOB" << endl;
+				for (auto& process : *temp)
+				{
+					if (!process.getExecuted())
+					{
+						currentJob = &process;
+						if (currentJob->getstartTime() == 0)
+							currentJob->setStartTime(i);
+						break;
+					}
+
+				}
+			}
+	
 
 
+		}
+		newArrived = false;
 	}
-	turnaroundtime /= temp.size();
+
+	//turnaroundtime /= temp.size();
 	//sort(temp.begin(), temp.end(), compareArrival);
-	outputData(temp, turnaroundtime, output);
+	outputData(*temp, 0.0, output);
 }
 
 
@@ -247,6 +299,8 @@ bool compareArrival(Process p1, Process p2) {
 bool compareExecution(Process p1, Process p2) {
 	return p1.getexecutionTime() < p2.getexecutionTime();
 }
+
+
 //funciton that checks if theyre are still jobs that havent arrived
 bool notArrived(vector<Process> totalProcesses) {
 	bool notArrived = true;

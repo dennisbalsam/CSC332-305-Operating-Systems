@@ -38,8 +38,14 @@ public:
 	//operator overload
 	friend ostream& operator<<(ostream& os, const Process& process)
 	{
-		os<< setw(5) << process.jobNumber +1 << setw(20) << process.arrivalTime << setw(20) << process.startTime << setw(20) << process.jobPriority
+		os<< setw(5) << process.jobNumber  << setw(20) << process.arrivalTime << setw(20) << process.startTime << setw(20) << process.jobPriority
 			<< setw(20) << process.completionTime << setw(20) << process.turnAroundTime << setw(20) << process.executionTime << setw(20) << process.executed << endl;
 		return os;
+	}
+	friend bool operator!=(Process p1, Process p2) {
+		return p1.jobNumber != p2.jobNumber;
+	}
+	friend bool operator==(Process p1, Process p2) {
+		return p1.jobNumber == p2.jobNumber;
 	}
 };
