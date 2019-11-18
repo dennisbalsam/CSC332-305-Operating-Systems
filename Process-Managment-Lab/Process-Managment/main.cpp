@@ -22,7 +22,7 @@ int search(int jobNumber, vector<Process> totalProcesses);
 int main() {
 
 	vector<Process> totalProcesses;
-	totalProcesses.push_back(Process(3, 2,3, 1));
+	totalProcesses.push_back(Process(3, 2, 3, 1));
 	totalProcesses.push_back(Process(4, 2, 2, 2));
 	totalProcesses.push_back(Process(1, 3, 1, 3));
 	totalProcesses.push_back(Process(2, 5, 3, 4));
@@ -31,16 +31,16 @@ int main() {
 	//outputData(totalProcesses);
 	//sjn(totalProcesses);
 	priority(totalProcesses);
-	
+
 	return 0;
 }
 
 //function def for input data
 void inputData(vector<Process>& totalProcesses) {
 	//variables for inputs needed to eliminate more thsn necessary cout statements
-	string dataNeeded[] { "Required Time", "Arrival Time", "Priority" };
-	int reqTime =0 , arrivalTime=0, priority=0;
-	int data[]{reqTime, arrivalTime, priority };
+	string dataNeeded[]{ "Required Time", "Arrival Time", "Priority" };
+	int reqTime = 0, arrivalTime = 0, priority = 0;
+	int data[]{ reqTime, arrivalTime, priority };
 
 	int totalJobs = 0;
 	//ask for total jobs
@@ -52,7 +52,7 @@ void inputData(vector<Process>& totalProcesses) {
 	{
 		for (int j = 0; j < 3; j++)
 		{
-			cout << "Please input the " << dataNeeded[j] << " of job " << i+1 << ": ";
+			cout << "Please input the " << dataNeeded[j] << " of job " << i + 1 << ": ";
 			cin >> data[j];
 		}
 		cout << "----------------------------------------------" << endl;
@@ -62,10 +62,10 @@ void inputData(vector<Process>& totalProcesses) {
 }
 
 //output data
-void outputData(vector<Process> totalProcesses,  double turnaroundtime, string order){
+void outputData(vector<Process> totalProcesses, double turnaroundtime, string order) {
 	//create headers table
-	cout <<  "Job Number" << setw(20) << "Arrival Time" << setw(20) << "Start Time" << setw(20) << "Priority" << setw(20)
-		<< "Completion Time" << setw(20) << "Turn Around Time" << setw(20) << "Execution Time"<< setw(20) << "Executed" << endl;
+	cout << "Job Number" << setw(20) << "Arrival Time" << setw(20) << "Start Time" << setw(20) << "Priority" << setw(20)
+		<< "Completion Time" << setw(20) << "Turn Around Time" << setw(20) << "Execution Time" << setw(20) << "Executed" << endl;
 	//loop to output each process
 	for (auto& process : totalProcesses)
 	{
@@ -90,7 +90,7 @@ void fcfs(vector<Process>& totalProcesses) {
 	totalProcesses[0].setCompletionTime(totalProcesses[0].getarrivalTime() + totalProcesses[0].getexecutionTime());
 	totalProcesses[0].setStartTime(totalProcesses[0].getarrivalTime());
 	totalProcesses[0].setTurnAroundTime(totalProcesses[0].getcompletionTime() - totalProcesses[0].getarrivalTime());
-	
+
 	string output = "The order of execution is: " + to_string(totalProcesses[0].getjobNumber() + 1);
 	//calculate values of rest of times
 	for (int i = 1; i < totalProcesses.size(); i++)
@@ -103,7 +103,7 @@ void fcfs(vector<Process>& totalProcesses) {
 		totalProcesses[i].setTurnAroundTime(totalProcesses[i].getcompletionTime() - totalProcesses[i].getarrivalTime());
 		//calculate avg turn around times
 		avgturnaroundtime += totalProcesses[i].getturnaroundTime();
-		output += " -> " +  to_string(totalProcesses[i].getjobNumber() + 1);
+		output += " -> " + to_string(totalProcesses[i].getjobNumber() + 1);
 	}
 	avgturnaroundtime /= totalProcesses.size();
 	//output this algorithims data
@@ -159,23 +159,23 @@ void sjn(vector<Process>& totalProcesses) {
 		if (runUntil == 0 && temp.size() > 1)
 		{
 			//for (auto process: temp)
-			for(int j = 0; j < temp.size(); j++)
+			for (int j = 0; j < temp.size(); j++)
 			{
 				if (!temp[j].getExecuted())
 				{
-					runUntil = i +  temp[j].getexecutionTime();
+					runUntil = i + temp[j].getexecutionTime();
 					currentlyRunning = temp[j].getjobNumber();
 					temp[j].setStartTime(i);
 					output += " -> " + to_string(temp[j].getjobNumber() + 1);
 					break;
 				}
 			}
-			
+
 		}
 
 
-		
-	
+
+
 
 	}
 	turnaroundtime /= temp.size();
@@ -191,20 +191,23 @@ void priority(vector<Process>& totalProcesses) {
 	sort(totalProcesses.begin(), totalProcesses.end(), compareArrival);
 
 	//temp vector for running through arrived jobs
-	vector<Process>* temp = new vector <Process>;
+	vector<Process> temp;
 	//dummy job
-	Process* currentJob = new Process(1, 1, 1, 1);
+	//Process* currentJob = new Process(1, 1, 1, -1);
 	//calculate how long the total time of execution should be
 	int totaltime = totalExectutionTime(totalProcesses) + totalProcesses[0].getarrivalTime();
 	double turnaroundtime = 0.0;
 	string output = "The order of execution is: ";
 	bool newArrived = false;
+	int currentlyrunning = -1;
+	int current = 0;
+	bool jobrunning = false;
 	//loop to represent real time os
 	for (int i = 1; i <= totaltime; i++)
 	{
-		cout << "We are on job " << currentJob->getjobNumber() << " at time " << i << endl;
+		
 		//check if there are processes that have not arrived
-		if (!notArrived(totalProcesses) && temp->size() != totalProcesses.size())
+		if (!notArrived(totalProcesses) && temp.size() != totalProcesses.size())
 		{
 			//loop to see if any jobs arrive at this time
 			for (auto& process : totalProcesses)
@@ -213,74 +216,88 @@ void priority(vector<Process>& totalProcesses) {
 				if (process.getarrivalTime() == i && !process.getArrived())
 				{
 					process.setArrived(true);
-					temp->push_back(process);
-					
-					//currentJob = &temp->front();
-					//cout << "The job you're on is " << currentJob->getjobNumber() << endl;
-					sort(temp->begin(), temp->end(), comparePriority);
-					if (*currentJob != temp->front())
-						newArrived = true;
+					temp.push_back(process);
+					sort(temp.begin(), temp.end(), comparePriority);
+					current = search(currentlyrunning, temp);
+					if (jobrunning)
+					{
+						if (temp[current] != temp.front())
+						{
+							newArrived = true;
+						}
+					}
 
 				}
 			}
 		}
-		if (temp->size() > 0)
+		//only enter if jobs have arrived
+		if (temp.size() > 0)
 		{
-			if (currentJob->getstartTime() != i && currentJob->getexecutionTime() != 0)
+
+			if (currentlyrunning != -1)
 			{
-
-				currentJob->decrementtime();
-
+				//decrements time if a job is running
+				if (temp[current].getstartTime() != i && temp[current].getexecutionTime() != 0)
+				{
+					temp[current].decrementtime();
+				}
 			}
 
-			if (currentJob->getexecutionTime() == 0)
+			//sets a job if one has conculded or none are running
+			if (temp[current].getexecutionTime() == 0 || currentlyrunning == -1)
 			{
-				currentJob->setCompletionTime(i);
-				currentJob->setExecuted(true);
-				
-				for (auto& process : *temp)
+				//if a job is running it finishes that job
+				if (currentlyrunning != -1)
+				{
+					temp[current].setCompletionTime(i);
+					temp[current].setExecuted(true);
+					temp[current].setTurnAroundTime(i - temp[current].getarrivalTime());
+					turnaroundtime += temp[current].getturnaroundTime();
+				}
+				//check which job is next up
+				for (auto& process : temp)
 				{
 					if (!process.getExecuted())
 					{
-						currentJob = &process;
 
-						if (currentJob->getstartTime() == 0)
-							currentJob->setStartTime(i);
+						currentlyrunning = process.getjobNumber();
+						current = search(currentlyrunning, temp);
+						if (temp[current].getstartTime() == 0)
+							temp[current].setStartTime(i);
+						jobrunning = true;
 						break;
 					}
 
 				}
 
 			}
-
-
-
-
-			if (newArrived && *currentJob != temp->front())
+			//set new job to execute if a higher priority arrived
+			if (newArrived && temp[current] != temp.front())
 			{
-				//cout << "ENTERING NEW JOB" << endl;
-				for (auto& process : *temp)
+				for (auto& process : temp)
 				{
 					if (!process.getExecuted())
 					{
-						currentJob = &process;
-						if (currentJob->getstartTime() == 0)
-							currentJob->setStartTime(i);
+						currentlyrunning = process.getjobNumber();
+
+						current = search(currentlyrunning, temp);
+						if (temp[current].getstartTime() == 0)
+							temp[current].setStartTime(i);
 						break;
 					}
 
 				}
 			}
-	
+
 
 
 		}
 		newArrived = false;
 	}
 
-	//turnaroundtime /= temp.size();
-	//sort(temp.begin(), temp.end(), compareArrival);
-	outputData(*temp, 0.0, output);
+	turnaroundtime /= temp.size();
+	sort(temp.begin(), temp.end(), compareArrival);
+	outputData(temp, turnaroundtime, output);
 }
 
 

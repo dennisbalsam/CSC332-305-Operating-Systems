@@ -1,6 +1,6 @@
 ﻿  main.cpp
 C:\Users\denni\Documents\CSI-Courses\CSC305\Process-Managment-Lab\Process-Managment\main.cpp(96,20): warning C4018:  '<': signed/unsigned mismatch
-C:\Users\denni\Documents\CSI-Courses\CSC305\Process-Managment-Lab\Process-Managment\main.cpp(162,21): warning C4018:  '<': signed/unsigned mismatch
-C:\Users\denni\Documents\CSI-Courses\CSC305\Process-Managment-Lab\Process-Managment\main.cpp(327,20): warning C4018:  '<': signed/unsigned mismatch
-C:\Users\denni\Documents\CSI-Courses\CSC305\Process-Managment-Lab\Process-Managment\main.cpp(327,20): warning C4018: C:\Users\denni\Documents\CSI-Courses\CSC305\Process-Managment-Lab\Process-Managment\main.cpp(335) : warning C4715: 'search': not all control paths return a value
+C:\Users\denni\Documents\CSI-Courses\CSC305\Process-Managment-Lab\Process-Managment\main.cpp(162,22): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\denni\Documents\CSI-Courses\CSC305\Process-Managment-Lab\Process-Managment\main.cpp(344,20): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\denni\Documents\CSI-Courses\CSC305\Process-Managment-Lab\Process-Managment\main.cpp(344,20): warning C4018: C:\Users\denni\Documents\CSI-Courses\CSC305\Process-Managment-Lab\Process-Managment\main.cpp(352) : warning C4715: 'search': not all control paths return a value
   Process-Managment.vcxproj -> C:\Users\denni\Documents\CSI-Courses\CSC305\Process-Managment-Lab\Process-Managment\Debug\Process-Managment.exe
