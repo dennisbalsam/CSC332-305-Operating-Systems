@@ -15,9 +15,11 @@ void priority(vector<Process>& totalProcesses);
 bool compareExecution(Process p1, Process p2);
 bool notArrived(vector<Process> totalProcesses);
 bool comparePriority(Process p1, Process p2);
+bool compareJobnum(Process p1, Process p2);
 bool compareArrival(Process, Process);
 int totalExectutionTime(vector<Process> totalProcesses);
 int search(int jobNumber, vector<Process> totalProcesses);
+char input;
 //main function
 int main() {
 
@@ -27,10 +29,26 @@ int main() {
 	totalProcesses.push_back(Process(1, 3, 1, 3));
 	totalProcesses.push_back(Process(2, 5, 3, 4));
 	//inputData(totalProcesses);
-	//fcfs(totalProcesses);
-	//outputData(totalProcesses);
-	//sjn(totalProcesses);
-	priority(totalProcesses);
+
+	cout << "Enter a algorithim (f for fcfs, s for sjn, p for priority): ";
+	cin >> input;
+
+	cout << endl;
+	switch (input)
+	{
+		case 'f':
+		case 'F':
+			fcfs(totalProcesses);
+			break;
+		case 's':
+		case 'S':
+			sjn(totalProcesses);
+			break;
+		case 'p':
+		case 'P':
+			priority(totalProcesses);
+			break;
+	}
 
 	return 0;
 }
@@ -90,8 +108,9 @@ void fcfs(vector<Process>& totalProcesses) {
 	totalProcesses[0].setCompletionTime(totalProcesses[0].getarrivalTime() + totalProcesses[0].getexecutionTime());
 	totalProcesses[0].setStartTime(totalProcesses[0].getarrivalTime());
 	totalProcesses[0].setTurnAroundTime(totalProcesses[0].getcompletionTime() - totalProcesses[0].getarrivalTime());
+	avgturnaroundtime += totalProcesses[0].getturnaroundTime();
 
-	string output = "The order of execution is: " + to_string(totalProcesses[0].getjobNumber() + 1);
+	string output = "The order of execution is: " + to_string(totalProcesses[0].getjobNumber());
 	//calculate values of rest of times
 	for (int i = 1; i < totalProcesses.size(); i++)
 	{
@@ -103,7 +122,7 @@ void fcfs(vector<Process>& totalProcesses) {
 		totalProcesses[i].setTurnAroundTime(totalProcesses[i].getcompletionTime() - totalProcesses[i].getarrivalTime());
 		//calculate avg turn around times
 		avgturnaroundtime += totalProcesses[i].getturnaroundTime();
-		output += " -> " + to_string(totalProcesses[i].getjobNumber() + 1);
+		output += " -> " + to_string(totalProcesses[i].getjobNumber());
 	}
 	avgturnaroundtime /= totalProcesses.size();
 	//output this algorithims data
@@ -166,7 +185,7 @@ void sjn(vector<Process>& totalProcesses) {
 					runUntil = i + temp[j].getexecutionTime();
 					currentlyRunning = temp[j].getjobNumber();
 					temp[j].setStartTime(i);
-					output += " -> " + to_string(temp[j].getjobNumber() + 1);
+					output += " -> " + to_string(temp[j].getjobNumber());
 					break;
 				}
 			}
@@ -179,7 +198,7 @@ void sjn(vector<Process>& totalProcesses) {
 
 	}
 	turnaroundtime /= temp.size();
-	sort(temp.begin(), temp.end(), compareArrival);
+	sort(temp.begin(), temp.end(), compareJobnum);
 	outputData(temp, turnaroundtime, output);
 
 }
@@ -253,6 +272,7 @@ void priority(vector<Process>& totalProcesses) {
 					temp[current].setExecuted(true);
 					temp[current].setTurnAroundTime(i - temp[current].getarrivalTime());
 					turnaroundtime += temp[current].getturnaroundTime();
+					output += " -> " + to_string(temp[current].getjobNumber());
 				}
 				//check which job is next up
 				for (auto& process : temp)
@@ -296,7 +316,7 @@ void priority(vector<Process>& totalProcesses) {
 	}
 
 	turnaroundtime /= temp.size();
-	sort(temp.begin(), temp.end(), compareArrival);
+	sort(temp.begin(), temp.end(), compareJobnum);
 	outputData(temp, turnaroundtime, output);
 }
 
@@ -315,6 +335,11 @@ bool compareArrival(Process p1, Process p2) {
 //compare execution times
 bool compareExecution(Process p1, Process p2) {
 	return p1.getexecutionTime() < p2.getexecutionTime();
+}
+
+//compare job numbers just for outputs
+bool compareJobnum(Process p1, Process p2) {
+	return p1.getjobNumber() < p2.getjobNumber();
 }
 
 
